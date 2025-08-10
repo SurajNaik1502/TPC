@@ -100,7 +100,7 @@
 @layer components {
   /* Glass Card Component */
   .glass-card {
-    @apply backdrop-blur-md border border-white/10 bg-gradient-to-br from-white/5 to-white/2;
+    @apply backdrop-blur-md border border-white/10 bg-gradient-to-br from-white/5 to-white/20;
     box-shadow: var(--shadow-glass);
   }
   
@@ -111,7 +111,7 @@
   }
   
   .glass-button:hover {
-    @apply border-white/30 from-white/15 to-white/8;
+    @apply border-white/30 from-white/15 to-white/20;
     transform: translateY(-2px);
     box-shadow: var(--shadow-glow);
   }
