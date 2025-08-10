@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
   GraduationCap, 
@@ -16,11 +17,11 @@ export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { name: "Training", icon: GraduationCap, href: "#training" },
-    { name: "Jobs", icon: Briefcase, href: "#jobs" },
-    { name: "AI Tools", icon: Sparkles, href: "#ai-tools" },
-    { name: "Resources", icon: FileText, href: "#resources" },
-    { name: "Live Sessions", icon: Video, href: "#sessions" },
+    { name: "Training", icon: GraduationCap, href: "/training" },
+    { name: "Jobs", icon: Briefcase, href: "/jobs" },
+    { name: "AI Tools", icon: Sparkles, href: "/ai-tools" },
+    { name: "About", icon: FileText, href: "/about" },
+    { name: "Contact", icon: Video, href: "/contact" },
   ];
 
   return (
@@ -28,12 +29,12 @@ export const Navigation = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center">
               <GraduationCap className="w-6 h-6 text-white" />
             </div>
             <span className="text-xl font-bold gradient-text">PlacementPro</span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
@@ -42,9 +43,12 @@ export const Navigation = () => {
                 key={item.name}
                 variant="ghost"
                 className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-smooth"
+                asChild
               >
-                <item.icon className="w-4 h-4" />
-                <span>{item.name}</span>
+                <Link to={item.href}>
+                  <item.icon className="w-4 h-4" />
+                  <span>{item.name}</span>
+                </Link>
               </Button>
             ))}
           </div>
@@ -80,9 +84,13 @@ export const Navigation = () => {
                 key={item.name}
                 variant="ghost"
                 className="w-full justify-start text-muted-foreground hover:text-foreground"
+                asChild
+                onClick={() => setIsMenuOpen(false)}
               >
-                <item.icon className="w-4 h-4 mr-2" />
-                {item.name}
+                <Link to={item.href}>
+                  <item.icon className="w-4 h-4 mr-2" />
+                  {item.name}
+                </Link>
               </Button>
             ))}
             <div className="flex flex-col space-y-2 pt-4 border-t border-white/10">
