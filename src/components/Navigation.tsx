@@ -55,9 +55,11 @@ export const Navigation = () => {
 
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center space-x-3">
-            <Button variant="glass" className="glass-button">
-              <MessageSquare className="w-4 h-4 mr-2" />
-              Chat
+            <Button variant="glass" className="glass-button" asChild>
+              <Link to="/chat">
+                <MessageSquare className="w-4 h-4 mr-2" />
+                Chat
+              </Link>
             </Button>
             <Button variant="hero" className="bg-gradient-primary hover:opacity-90 transition-smooth">
               <User className="w-4 h-4 mr-2" />
@@ -94,9 +96,11 @@ export const Navigation = () => {
               </Button>
             ))}
             <div className="flex flex-col space-y-2 pt-4 border-t border-white/10">
-              <Button variant="glass" className="glass-button justify-start">
-                <MessageSquare className="w-4 h-4 mr-2" />
-                Chat
+              <Button variant="glass" className="glass-button justify-start" asChild>
+                <Link to="/chat">
+                  <MessageSquare className="w-4 h-4 mr-2" />
+                  Chat
+                </Link>
               </Button>
               <Button variant="hero" className="bg-gradient-primary justify-start">
                 <User className="w-4 h-4 mr-2" />
