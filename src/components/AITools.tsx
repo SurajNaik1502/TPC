@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { AIToolModal } from "./AIToolModal";
 import { 
   FileText, 
   MessageSquare, 
@@ -15,6 +17,9 @@ import {
 } from "lucide-react";
 
 export const AITools = () => {
+  const [selectedTool, setSelectedTool] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const tools = [
     {
       id: 1,
@@ -136,7 +141,14 @@ export const AITools = () => {
                 
                 {/* Action Buttons */}
                 <div className="flex space-x-3 pt-4">
-                  <Button variant="hero" className="flex-1">
+                  <Button 
+                    variant="hero" 
+                    className="flex-1"
+                    onClick={() => {
+                      setSelectedTool(tool);
+                      setIsModalOpen(true);
+                    }}
+                  >
                     Try Now
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -167,6 +179,13 @@ export const AITools = () => {
             </Button>
           </div>
         </div>
+
+        {/* AI Tool Modal */}
+        <AIToolModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          tool={selectedTool}
+        />
       </div>
     </section>
   );

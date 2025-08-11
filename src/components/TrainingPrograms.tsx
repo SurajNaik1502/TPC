@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { TrainingEnrollModal } from "./TrainingEnrollModal";
 import { 
   Code, 
   Database, 
@@ -14,6 +16,9 @@ import {
 } from "lucide-react";
 
 export const TrainingPrograms = () => {
+  const [selectedProgram, setSelectedProgram] = useState(null);
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+
   const programs = [
     {
       id: 1,
@@ -148,7 +153,14 @@ export const TrainingPrograms = () => {
                 
                 {/* Actions */}
                 <div className="flex space-x-3 pt-2">
-                  <Button variant="hero" className="flex-1">
+                  <Button 
+                    variant="hero" 
+                    className="flex-1"
+                    onClick={() => {
+                      setSelectedProgram(program);
+                      setIsEnrollModalOpen(true);
+                    }}
+                  >
                     Enroll Now
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -168,6 +180,13 @@ export const TrainingPrograms = () => {
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>
+
+        {/* Enrollment Modal */}
+        <TrainingEnrollModal
+          isOpen={isEnrollModalOpen}
+          onClose={() => setIsEnrollModalOpen(false)}
+          program={selectedProgram}
+        />
       </div>
     </section>
   );

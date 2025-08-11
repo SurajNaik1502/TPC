@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { JobApplicationModal } from "./JobApplicationModal";
+import { JobDetailsModal } from "./JobDetailsModal";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -18,6 +20,9 @@ import {
 
 export const JobBoard = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
 
   const jobs = [
     {
@@ -222,11 +227,25 @@ export const JobBoard = () => {
                 </div>
                 
                 <div className="flex space-x-3">
-                  <Button variant="hero" className="flex-1">
+                  <Button 
+                    variant="hero" 
+                    className="flex-1"
+                    onClick={() => {
+                      setSelectedJob(job);
+                      setIsApplicationModalOpen(true);
+                    }}
+                  >
                     Apply Now
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
-                  <Button variant="glass" className="glass-button">
+                  <Button 
+                    variant="glass" 
+                    className="glass-button"
+                    onClick={() => {
+                      setSelectedJob(job);
+                      setIsDetailsModalOpen(true);
+                    }}
+                  >
                     View Details
                   </Button>
                 </div>
@@ -242,6 +261,23 @@ export const JobBoard = () => {
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>
+
+        {/* Modals */}
+        <JobApplicationModal
+          isOpen={isApplicationModalOpen}
+          onClose={() => setIsApplicationModalOpen(false)}
+          job={selectedJob}
+        />
+        
+        <JobDetailsModal
+          isOpen={isDetailsModalOpen}
+          onClose={() => setIsDetailsModalOpen(false)}
+          onApply={() => {
+            setIsDetailsModalOpen(false);
+            setIsApplicationModalOpen(true);
+          }}
+          job={selectedJob}
+        />
       </div>
     </section>
   );
