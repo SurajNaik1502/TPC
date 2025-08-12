@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/hooks/useAuth";
 import { 
   GraduationCap, 
   Briefcase, 
@@ -10,11 +13,14 @@ import {
   X,
   Sparkles,
   FileText,
-  Video
+  Video,
+  LogOut,
+  LogIn
 } from "lucide-react";
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, isAuthenticated, signOut } = useAuth();
 
   const navItems = [
     { name: "Training", icon: GraduationCap, href: "/training" },
@@ -55,16 +61,38 @@ export const Navigation = () => {
 
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center space-x-3">
-            <Button variant="glass" className="glass-button" asChild>
-              <Link to="/chat">
-                <MessageSquare className="w-4 h-4 mr-2" />
-                Chat
-              </Link>
-            </Button>
-            <Button variant="hero" className="bg-gradient-primary hover:opacity-90 transition-smooth">
-              <User className="w-4 h-4 mr-2" />
-              Sign In
-            </Button>
+            {isAuthenticated && (
+              <Button variant="glass" className="glass-button" asChild>
+                <Link to="/chat">
+                  <MessageSquare className="w-4 h-4 mr-2" />
+                  Chat
+                </Link>
+              </Button>
+            )}
+            
+            {isAuthenticated ? (
+              <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2">
+                  <Avatar className="w-8 h-8">
+                    <AvatarFallback className="bg-gradient-primary text-white text-sm">
+                      {user?.email?.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <Badge variant="secondary" className="text-xs">Online</Badge>
+                </div>
+                <Button variant="outline" size="sm" onClick={signOut}>
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <Button variant="hero" className="bg-gradient-primary hover:opacity-90 transition-smooth" asChild>
+                <Link to="/auth">
+                  <LogIn className="w-4 h-4 mr-2" />
+                  Sign In
+                </Link>
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -96,16 +124,28 @@ export const Navigation = () => {
               </Button>
             ))}
             <div className="flex flex-col space-y-2 pt-4 border-t border-white/10">
-              <Button variant="glass" className="glass-button justify-start" asChild>
-                <Link to="/chat">
-                  <MessageSquare className="w-4 h-4 mr-2" />
-                  Chat
-                </Link>
-              </Button>
-              <Button variant="hero" className="bg-gradient-primary justify-start">
-                <User className="w-4 h-4 mr-2" />
-                Sign In
-              </Button>
+              {isAuthenticated && (
+                <Button variant="glass" className="glass-button justify-start" asChild>
+                  <Link to="/chat">
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Chat
+                  </Link>
+                </Button>
+              )}
+              
+              {isAuthenticated ? (
+                <Button variant="outline" className="justify-start" onClick={signOut}>
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out
+                </Button>
+              ) : (
+                <Button variant="hero" className="bg-gradient-primary justify-start" asChild>
+                  <Link to="/auth">
+                    <LogIn className="w-4 h-4 mr-2" />
+                    Sign In
+                  </Link>
+                </Button>
+              )}
             </div>
           </div>
         )}
