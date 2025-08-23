@@ -15,7 +15,9 @@ import {
   FileText,
   Video,
   LogOut,
-  LogIn
+  LogIn,
+  Scan,
+  Edit3
 } from "lucide-react";
 
 export const Navigation = () => {
@@ -25,6 +27,8 @@ export const Navigation = () => {
   const navItems = [
     { name: "Training", icon: GraduationCap, href: "/training" },
     { name: "Jobs", icon: Briefcase, href: "/jobs" },
+    { name: "Resume Generator", icon: Edit3, href: "/resume-generator" },
+    { name: "Resume Scanner", icon: Scan, href: "/resume-scanner" },
     { name: "AI Tools", icon: Sparkles, href: "/ai-tools" },
     { name: "About", icon: FileText, href: "/about" },
     { name: "Contact", icon: Video, href: "/contact" },
@@ -35,7 +39,7 @@ export const Navigation = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/training" className="flex items-center space-x-2">
             <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center">
               <GraduationCap className="w-6 h-6 text-white" />
             </div>
@@ -73,11 +77,13 @@ export const Navigation = () => {
             {isAuthenticated ? (
               <div className="flex items-center space-x-3">
                 <div className="flex items-center space-x-2">
-                  <Avatar className="w-8 h-8">
-                    <AvatarFallback className="bg-gradient-primary text-white text-sm">
-                      {user?.email?.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
+                  <Link to="/profile">
+                    <Avatar className="w-8 h-8 cursor-pointer hover:ring-2 hover:ring-primary transition-smooth">
+                      <AvatarFallback className="bg-gradient-primary text-white text-sm">
+                        {user?.email?.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Link>
                   <Badge variant="secondary" className="text-xs">Online</Badge>
                 </div>
                 <Button variant="outline" size="sm" onClick={signOut}>

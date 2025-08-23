@@ -11,6 +11,9 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Chat from "./pages/Chat";
 import Auth from "./pages/Auth";
+import Profile from "./pages/Profile";
+import ResumeGenerator from "./pages/ResumeGenerator";
+import ResumeScanner from "./pages/ResumeScanner";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,10 +25,14 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<Training />} />
+          <Route path="/home" element={<Index />} />
           <Route path="/training" element={<Training />} />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/ai-tools" element={<AITools />} />
+          <Route path="/resume-generator" element={<ResumeGenerator />} />
+          <Route path="/resume-scanner" element={<ResumeScanner />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/chat" element={<Chat />} />
