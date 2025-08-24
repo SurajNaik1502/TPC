@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import ResumeGenerator from "./pages/ResumeGenerator";
 import ResumeScanner from "./pages/ResumeScanner";
 import NotFound from "./pages/NotFound";
+import { ChatbotProvider } from "@/components/ChatbotProvider";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <ChatbotProvider />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

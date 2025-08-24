@@ -47,20 +47,23 @@ const Profile = () => {
           .from('profiles')
           .select('*')
           .eq('user_id', user.id)
-          .single();
+          .maybeSingle();
 
         if (error && error.code !== 'PGRST116') { // PGRST116 = no rows found
           throw error;
         }
 
-        setProfile(data || {
+        // Ensure all fields are present with fallback values
+        const profileData: Profile = {
           user_id: user.id,
-          display_name: null,
-          avatar_url: null,
-          phone: null,
-          location: null,
-          bio: null
-        });
+          display_name: data?.display_name || null,
+          avatar_url: data?.avatar_url || null,
+          phone: data?.phone || null,
+          location: data?.location || null,
+          bio: data?.bio || null
+        };
+
+        setProfile(profileData);
       } catch (error) {
         console.error('Error loading profile:', error);
         toast.error('Failed to load profile');
