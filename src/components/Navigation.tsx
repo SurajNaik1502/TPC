@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/hooks/useAuth";
 import { 
   GraduationCap, 
@@ -66,29 +65,24 @@ export const Navigation = () => {
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center space-x-3">
             {isAuthenticated && (
-              <Button variant="glass" className="glass-button" asChild>
+              <Button variant="glass" size="icon" className="glass-button" asChild>
                 <Link to="/chat">
-                  <MessageSquare className="w-4 h-4 mr-2" />
-                  Chat
+                  <MessageSquare className="w-4 h-4" />
                 </Link>
               </Button>
             )}
             
             {isAuthenticated ? (
               <div className="flex items-center space-x-3">
-                <div className="flex items-center space-x-2">
-                  <Link to="/profile">
-                    <Avatar className="w-8 h-8 cursor-pointer hover:ring-2 hover:ring-primary transition-smooth">
-                      <AvatarFallback className="bg-gradient-primary text-white text-sm">
-                        {user?.email?.charAt(0).toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                  </Link>
-                  <Badge variant="secondary" className="text-xs">Online</Badge>
-                </div>
-                <Button variant="outline" size="sm" onClick={signOut}>
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Sign Out
+                <Link to="/profile">
+                  <Avatar className="w-8 h-8 cursor-pointer hover:ring-2 hover:ring-primary transition-smooth">
+                    <AvatarFallback className="bg-gradient-primary text-white text-sm">
+                      {user?.email?.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                </Link>
+                <Button variant="outline" size="icon" onClick={signOut}>
+                  <LogOut className="w-4 h-4" />
                 </Button>
               </div>
             ) : (
