@@ -20,6 +20,23 @@ export const AITools = () => {
   const [selectedTool, setSelectedTool] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const getToolUrl = (toolId: number) => {
+    const urlMap = {
+      1: "https://cv-optimize-bot.lovable.app", // AI Resume Analyzer
+      2: "https://ai-interview-mastery.vercel.app/dashboard", // Mock Interview Bot
+      3: "https://pro-path-evaluator.lovable.app/", // Skill Assessment
+      4: "https://cloud.uibakery.io/share/GolRO4DbZV/home" // Interview Simulator
+    };
+    return urlMap[toolId as keyof typeof urlMap];
+  };
+
+  const handleTryNow = (toolId: number) => {
+    const url = getToolUrl(toolId);
+    if (url) {
+      window.open(url, '_blank');
+    }
+  };
+
   const tools = [
     {
       id: 1,
