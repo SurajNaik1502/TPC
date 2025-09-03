@@ -25,7 +25,7 @@ export const Navigation = () => {
 
   const navItems = [
     { name: "Training", icon: GraduationCap, href: "/training" },
-    { name: "Jobs", icon: Briefcase, href: "/jobs" },
+    { name: "Jobs", icon: Briefcase, href: "https://synapse-recruitment.lovable.app/student-dashboard", external: true },
     { name: "Resume Generator", icon: Edit3, href: "/resume-generator" },
     { name: "Resume Scanner", icon: Scan, href: "/resume-scanner" },
     { name: "AI Tools", icon: Sparkles, href: "/ai-tools" },
@@ -54,10 +54,17 @@ export const Navigation = () => {
                 className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-smooth"
                 asChild
               >
-                <Link to={item.href}>
-                  <item.icon className="w-4 h-4" />
-                  <span>{item.name}</span>
-                </Link>
+                {item.external ? (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer">
+                    <item.icon className="w-4 h-4" />
+                    <span>{item.name}</span>
+                  </a>
+                ) : (
+                  <Link to={item.href}>
+                    <item.icon className="w-4 h-4" />
+                    <span>{item.name}</span>
+                  </Link>
+                )}
               </Button>
             ))}
           </div>
@@ -66,9 +73,9 @@ export const Navigation = () => {
           <div className="hidden md:flex items-center space-x-3">
             {isAuthenticated && (
               <Button variant="glass" size="icon" className="glass-button" asChild>
-                <Link to="/chat">
+                <a href="https://quickchat.greatstack.in/" target="_blank" rel="noopener noreferrer">
                   <MessageSquare className="w-4 h-4" />
-                </Link>
+                </a>
               </Button>
             )}
             
@@ -117,19 +124,26 @@ export const Navigation = () => {
                 asChild
                 onClick={() => setIsMenuOpen(false)}
               >
-                <Link to={item.href}>
-                  <item.icon className="w-4 h-4 mr-2" />
-                  {item.name}
-                </Link>
+                {item.external ? (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer">
+                    <item.icon className="w-4 h-4 mr-2" />
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link to={item.href}>
+                    <item.icon className="w-4 h-4 mr-2" />
+                    {item.name}
+                  </Link>
+                )}
               </Button>
             ))}
             <div className="flex flex-col space-y-2 pt-4 border-t border-white/10">
               {isAuthenticated && (
                 <Button variant="glass" className="glass-button justify-start" asChild>
-                  <Link to="/chat">
+                  <a href="https://quickchat.greatstack.in/" target="_blank" rel="noopener noreferrer">
                     <MessageSquare className="w-4 h-4 mr-2" />
                     Chat
-                  </Link>
+                  </a>
                 </Button>
               )}
               
