@@ -161,10 +161,7 @@ export const AITools = () => {
                   <Button 
                     variant="hero" 
                     className="flex-1"
-                    onClick={() => {
-                      setSelectedTool(tool);
-                      setIsModalOpen(true);
-                    }}
+                    onClick={() => handleTryNow(tool.id)}
                   >
                     Try Now
                     <ArrowRight className="w-4 h-4 ml-2" />
