@@ -25,7 +25,7 @@ export const AITools = () => {
       1: "https://cv-optimize-bot.lovable.app", // AI Resume Analyzer
       2: "https://ai-interview-mastery.vercel.app/dashboard", // Mock Interview Bot
       3: "https://pro-path-evaluator.lovable.app/", // Skill Assessment
-      4: "https://cloud.uibakery.io/share/GolRO4DbZV/home" // Interview Simulator
+      4: "https://intervue-prodigy.lovable.app" // Interview Simulator
     };
     return urlMap[toolId as keyof typeof urlMap];
   };
